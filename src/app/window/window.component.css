@@ -1,0 +1,11 @@
+.wind {
+  width: 20vw;
+  height: 25vh
+}
+
+:host {
+  width: 20vw;
+  height: 25vh;
+  margin: 0 0 0 0;
+  padding: 0;
+}

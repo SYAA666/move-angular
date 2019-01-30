@@ -1,0 +1,14 @@
+@import "../../node_modules/materialize-css/dist/css/materialize.css";
+
+.head {
+  margin: 0;
+  width: 100vw;
+  height: 5vh;
+}
+
+.window {
+  margin: 0;
+  width: 100vw;
+  height: 95vh;
+}
+
