@@ -1,7 +1,7 @@
 <div class="card-panel head blue">
   <button class="btn-floating blue darken-1"><i class="material-icons">add</i></button>
 </div>
-<div class="window">
+<div (dragstart)="disable()" class="window">
   <app-window [index]="1"></app-window>
 </div>
 

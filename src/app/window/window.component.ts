@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ViewChild, ElementRef, Renderer} from '@angular/core';
+import {Component, OnInit, Input, ElementRef} from '@angular/core';
 
 @Component({
   selector: 'app-window',
@@ -6,33 +6,40 @@ import {Component, OnInit, Input, ViewChild, ElementRef, Renderer} from '@angula
   styleUrls: ['./window.component.css']
 })
 export class WindowComponent implements OnInit {
-  constructor(rd: Renderer) { }
-  @ViewChild('windowElement') window; @Input() index: number;
-  public X: any;
-  public Y: any;
-  /*
-
-  lol() {
-    console.log(this.index);
-  }
-  deleteNode() {
-    this.window.nativeElement.parentNode.style.display = 'none';
-  }
-  } */
+  constructor( private elRef: ElementRef) { }
+  @Input() index: number;
+  thatBody = this.elRef.nativeElement;
+  evt;
   ngOnInit(): void {
-
+  
   }
   deleteNode() {
-    this.window.nativeElement.parentNode.innerHTML = '';
+    this.elRef.nativeElement.innerHTML = '';
   }
+
+  moveWithMouse(X, Y) {
+    this.thatBody.style.left = X - (this.thatBody.offsetWidth / 2) + 'px';
+    this.thatBody.style.top =  Y- (this.thatBody.offsetHeight / 2) + 'px';
+  }
+
+  move(event) {
+    this.moveWithMouse(event.pageX, event.pageY);
+  }
+  
   onMouseDown(event) {
-    const windowNode = this.window.nativeElement.parentNode;
-    windowNode.style.position = 'absolute';
-    windowNode.style.zIndex = 999;
-    addEventListener('mousemove', () => {
-      windowNode.style.marginLeft = pageXOffset;
-      windowNode.style.marginTop =  pageYOffset;
+    this.thatBody.style.position = 'absolute';
+    this.thatBody.addEventListener('mousemove', (event) => {
+      this.thatBody.style.left = event.pageX - (this.thatBody.offsetWidth / 2) + 'px';
+      this.thatBody.style.top =  event.pageY - (this.thatBody.offsetHeight / 2) + 'px';
     });
+  }
+  onMouseUp(event) {
+    const evt = event;
+    event.target.removeEventListener('mousemove',(event) => {
+      this.thatBody.style.left = event.pageX - (this.thatBody.offsetWidth / 2) + 'px';
+      this.thatBody.style.top =  event.pageY - (this.thatBody.offsetHeight / 2) + 'px';
+    });
+    this.thatBody.onmouseup = null;
   }
   /* moveWithMouse(event) {
     const windowNode = this.window.nativeElement.parentNode;
