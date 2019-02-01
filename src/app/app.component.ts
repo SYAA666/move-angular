@@ -6,8 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'move-angular';
+  windowsArray: number[] = [1];
   disable() {
     return false;
+  }
+  addWindow() {
+    this.windowsArray.push(this.windowsArray.length + 1);
   }
 }
